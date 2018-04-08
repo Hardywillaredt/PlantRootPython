@@ -1,0 +1,35 @@
+Switching listS to vecS for the last property both on bMetaGraphand bSkeleton
+- this may end up correlating to increased efficiency in the mapping python iterator
+
+for edges we want to be able to do coloration by....
+thickness
+width
+ratio
+component (less care)
+
+we also want to keep track of edges which are still 'present' - eg mapped to a metaedge
+
+
+
+for nodes we want to be able to do coloration by...
+thickness
+width
+degree
+component
+
+we also want to be able to add nodes?
+
+
+
+
+we dont want to copy shit every time
+
+
+we need to be able to iterate over something and apply those colorations
+
+
+NO MAS OF THE LINEGL and NODEGL bull
+
+everything in c++???????
+
+pretend python doesn't exist

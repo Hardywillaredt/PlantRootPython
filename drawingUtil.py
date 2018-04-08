@@ -31,7 +31,10 @@ from OpenGL.GLUT import *
 import numpy as np
 
 def p3d2arr(p3d : Point3d):
-    return np.array([p3d.x, p3d.y, p3d.z])
+    if isinstance(p3d, Point3d) or isinstance(p3d, MetaNode3d):
+        return np.array([p3d.x, p3d.y, p3d.z])
+    else:
+        return p3d
 
 # v0 and v1 are point3d endpoints
 # reflectance is the color to reflect on the skeleton

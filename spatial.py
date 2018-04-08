@@ -6,7 +6,10 @@ class Spatial(object):
     def __init__(self, position=None, orientation=None):
         self._pos = v3(0,0,0)
         self._ori = quat(0,0,0,1)
-        
+        self.viewCenter = v3()
+        self.theta = np.pi / 2.0
+        self.phi = 0.0
+        self.standoff = 100.0
         if position is not None:
             self.set_position(position)
 
@@ -21,6 +24,28 @@ class Spatial(object):
 #        return np.array([[self._pos[0]],
 #                         [self._pos[1]],
 #                         [self._pos[2]]])
+
+    def increment_phi(self, deltaPhi):
+        self.phi += deltaPhi
+        while self.phi < 0:
+            self.phi += 2.0*np.pi
+        while self.phi > 2.0 * np.pi:
+            self.phi -= 2.0*np.pi
+        
+
+    def increment_theta(self, deltaTheta):
+        if self.theta + deltaTheta > np.pi-0.0001:
+            self.theta = np.pi-0.0001
+        elif self.theta + deltaTheta < 0.0001:
+            self.theta = 0.0001
+        else:
+            self.theta += deltaTheta
+
+    def resolveAngularPosition(self):
+        eyex = self.viewCenter[0] + self.standoff*np.cos(self.phi)*np.sin(self.theta)
+        eyez = self.viewCenter[2] + self.standoff*np.sin(self.phi)*np.sin(self.theta)
+        eyey = self.viewCenter[1] + self.standoff*np.cos(self.theta)
+        self._pos = [eyex, eyey, eyez]
 
     def set_position(self, value):
         self._pos[:] = value
@@ -37,12 +62,23 @@ class Spatial(object):
     def goForward(self, dist):
         forward_world = q_mul_v(self._ori, V3_ZAXIS*-1)
         self._pos += dist*forward_world
+        self.viewCenter += dist*forward_world
         
     def goRight(self, dist):
         right_world = q_mul_v(self._ori, V3_XAXIS*1)
         self._pos += dist * right_world
+        self.viewCenter += dist*right_world
     
     def goUp(self, dist):
+        up_world = q_mul_v(self._ori, V3_YAXIS*1)
+        self._pos += dist * up_world
+        self.viewCenter += dist*up_world
+
+    def goRightKeepCenter(self, dist):
+        right_world = q_mul_v(self._ori, V3_XAXIS*1)
+        self._pos += dist * right_world
+
+    def goUpKeepCenter(self, dist):
         up_world = q_mul_v(self._ori, V3_YAXIS*1)
         self._pos += dist * up_world
     
@@ -71,16 +107,19 @@ class Spatial(object):
         """yaw by angle given in radians"""
         q = quat_axis_angle(V3_YAXIS, angle)
         self._ori[:] = q_mul(self._ori, q)
+        self.viewCenter = self.standoff * self.get_world_forward() + self.get_position()
 
     def pitch(self, angle):
         """pitch by angle given in radians"""
         q = quat_axis_angle(V3_XAXIS, angle)
         self._ori[:] = q_mul(self._ori, q)
+        self.viewCenter = self.standoff * self.get_world_forward() + self.get_position()
 
     def roll(self, angle):
         """roll by angle given in radians"""
         q = quat_axis_angle(V3_ZAXIS, angle)
         self._ori[:] = q_mul(self._ori, q)
+        self.viewCenter = self.standoff * self.get_world_forward() + self.get_position()
 
     def look_dir(self, look, up=None):
         ulook = normalize(look)

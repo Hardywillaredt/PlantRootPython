@@ -85,11 +85,7 @@ class SkeletonViewer(QOpenGLWidget):
         
         self.camera.set_position(v3(c.x, c.y, c.z + diam))
         self.camera.look_at(v3(c.x-diam, c.y-diam, c.z-diam))
-        
-        print(c.x)
-        print(c.y)
-        print(c.z)
-        print(diam)
+
         
     def setMetaGraph(self, graph):
         self.graph = graph
@@ -99,24 +95,12 @@ class SkeletonViewer(QOpenGLWidget):
         self.graph.skeleton.findBoundingSphere()
         self.graph.skeleton.reload()
         
-        print('post reload vertices')
         
-        for node in self.graph.skeleton.vertices:
-            print(str(node.x) + ' ' + str(node.y) + ' ' + str(node.z))
-        
-        print('post reload edges')
-        for root in self.graph.skeleton.edges:
-            print(str(root.v0id) + ' ' + str(root.v1id))
+       
         
         self.center = self.graph.skeleton.center
         self.radius = self.graph.skeleton.radius
-        
-        print("skeleton info")
-        print(self.center.x)
-        print(self.center.y)
-        print(self.center.z)
-        print(self.radius)
-        print("end skeleton info")
+
         self.isGraphSet = True
         
         
@@ -127,14 +111,11 @@ class SkeletonViewer(QOpenGLWidget):
         gl.glLineWidth(2)
         gl.glColor3f(0.0, 0.9, 1.0)
         gl.glBegin(gl.GL_LINES)
-        print('looking at edge connections ')
-        print(len(self.graph.edgeConnections))
         for i in range(0, int(len(self.graph.edgeConnections))):
             vert1Index = self.graph.edgeConnections[i].node0
             vert2Index = self.graph.edgeConnections[i].node1
             point1 = self.graph.nodeLocations[vert1Index]
             point2 = self.graph.nodeLocations[vert2Index]
-            print(' ' + str(point1.x) + ' ' + str(point1.y) + ' ' + str(point1.z))
             gl.glVertex3f(point1.x, point1.y, point1.z)
             gl.glVertex3f(point2.x, point2.y, point2.z)
         gl.glEnd()
@@ -148,7 +129,6 @@ class SkeletonViewer(QOpenGLWidget):
         gl.glLineWidth(2)
         gl.glColor3f(0.0, 0.9, 1.0)
         gl.glBegin(gl.GL_LINES)
-        print('number of skeleton edges ' + str(len(self.graph.skeleton.edges)))
         for i in range(0, int(len(self.graph.skeleton.edges))):
             vert1Index = self.graph.skeleton.edges.v0id
             vert2Index = self.graph.skeleton.edges.v1id
@@ -158,8 +138,6 @@ class SkeletonViewer(QOpenGLWidget):
             point2 = self.graph.skeleton.vertices[vert2Index]
             gl.glVertex3f(point1.x, point1.y, point1.z)
             gl.glVertex3f(point2.x, point2.y, point2.z)
-            print(str(point1.x) + ' ' + str(point1.y) + ' ' + str(point1.z))
-            print(str(point2.x) + ' ' + str(point2.y) + ' ' + str(point2.z))
         gl.glEnd()
         gl.glEndList()
         return glList

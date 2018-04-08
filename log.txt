@@ -1,0 +1,732 @@
+loading pyskeleton from filebeginning istream for fileloading pyskeleton from filebeginning istream for fileloading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+The skeleton header lacks sufficient info to parse.  Ending read attempt
+loading pyskeleton from file
+loading pyskeleton from file
+loading pyskeleton from file
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+Successfully loaded all edges
+Not all data read from file, that is slightly strange
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all vertices
+Successfully loaded all edges
+Not all data read from file, that is slightly strange
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:34
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:35
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:36
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:37
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:38
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:39
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:40
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:41
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:43
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:43
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+23:43
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:45
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:46
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:47
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+23:58
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+0:12
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+The skeleton header lacks sufficient info to parse.  Ending read attempt
+0:13
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+The skeleton header lacks sufficient info to parse.  Ending read attempt
+2:49
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:50
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:51
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:51
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:52
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:53
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:56
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+2:58
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:0
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:2
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:3
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:7
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:10
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:13
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:14
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+3:15
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:13
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:15
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:16
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:17
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+The skeleton header lacks sufficient info to parse.  Ending read attempt
+4:19
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:33
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+4:33
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:15
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:15
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:24
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:47
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:49
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:50
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:51
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+5:54
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+9:11
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+9:23
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+The skeleton header lacks sufficient info to parse.  Ending read attempt
+10:29
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:32
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:33
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:37
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:39
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:40
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:41
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:42
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:43
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:44
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:45
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:47
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:48
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:49
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:51
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:53
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:55
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:56
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:57
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:57
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+10:59
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+12:8
+loading pyskeleton from file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+20:30
+beginning istream for file
+Istream operation for skeleton
+The skeleton file lacks the begin_skeletonheader. Should attempt to load wenzhen style file 
+Wenzhen file - vertices: 11848 edges: 11851
+Successfully loaded all 11848 vertices
+Successfully loaded all 11851 edges
+Not all data read from file, that is slightly strange
+End of istream for skeleton file

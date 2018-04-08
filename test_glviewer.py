@@ -1,10 +1,13 @@
 import sys
 import math
 
-from RootsTool import MetaGraph
+from RootsTool import MetaGraph, IssuesGL, VBOSphere
 from ConnectionTabWidget import Ui_ConnectionTabWidget
+from BreakTabWidget import Ui_BreakTabWidget
+from SplitTabWidget import Ui_SplitTabWidget
 
 from PyQt5 import QtCore, QtGui, QtOpenGL, QtWidgets
+from PyQt5.QtCore import pyqtSlot, pyqtSignal
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -21,6 +24,7 @@ from vecmath import *
 import numpy as np
 
 from typing import Union
+import random
 
 try:
     from OpenGL.GL import *
@@ -29,18 +33,70 @@ except ImportError:
     QtGui.QMessageBox.critical(None, "OpenGL grabber",
             "PyOpenGL must be installed to run this example.")
     sys.exit(1)
-
+import OpenGL.GL as gl
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+from GLObjects import MetaGraphGL, p3d2arr
+
 import SkelGL
 
-from MetaGraphThread import MetaGraphThread
+from MetaGraphThread import MetaGraphThread, LoadOperationThread, JoinOperationThread, BreakOperationThread, SplitOperationThread
+from RootsTool import  Point3d, RootAttributes, Skeleton, MetaNode3d, MetaEdge3d, MetaGraph
+
+
+
 
 class GLWidget(QtOpenGL.QGLWidget):
-    xRotationChanged = QtCore.pyqtSignal(int)
-    yRotationChanged = QtCore.pyqtSignal(int)
-    zRotationChanged = QtCore.pyqtSignal(int)
+    xRotationChanged = pyqtSignal(int)
+    yRotationChanged = pyqtSignal(int)
+    zRotationChanged = pyqtSignal(int)
+
+
+
+    @pyqtSlot(str)
+    def loadFileEvent(self, filename : str):
+        self.loadThread = LoadOperationThread(filename)
+        self.loadThread.finished.connect(self.loadThread.deleteLater)
+        self.loadThread.sigUpdateMetaGraph.connect(self.metaGL.loadGraphSlot)
+        self.loadThread.run()
+    
+    @pyqtSlot(int, int)
+    def acceptConnection(self, v0id, v1id):
+        self.connectionThread = JoinOperationThread(self.metaGL.graph, v0id, v1id)
+        self.connectionThread.finished.connect(self.connectionThread.deleteLater)
+        self.connectionThread.sigUpdateMetaGraph.connect(self.metaGL.updateGraphSlot)
+        self.connectionThread.run()
+            
+    @pyqtSlot(object)
+    def acceptBreak(self, edge : MetaEdge3d):
+        self.breakThread = BreakOperationThread(self.metaGL.graph, edge)
+        self.breakThread.finished.connect(self.breakThread.deleteLater)
+        self.breakThread.sigUpdateMetaGraph.connect(self.metaGL.updateGraphSlot)
+        self.breakThread.run()
+
+    @pyqtSlot(object, object)
+    def acceptSplit(self, splitEdge : MetaEdge3d, secondaries):
+        self.splitThread = SplitOperationThread(self.metaGL.graph, splitEdge, secondaries)
+        self.splitThread.finished.connect(self.splitThread.deleteLater)
+        self.splitThread.sigUpdateMetaGraph.connect(self.metaGL.updateGraphSlot)
+        #self.splitThread.start()
+        self.splitThread.run()
+
+    @pyqtSlot(object)
+    def viewCenterChanged(self, center):
+        self.camera.look_at(center)
+        self.camera.viewCenter = center
+        self.camera.standoff = np.linalg.norm(self.camera.viewCenter - self.camera.get_position())
+        self.camera.resolveAngularPosition()
+
+    @pyqtSlot()
+    def recenter(self):
+        self.camera.viewCenter = p3d2arr(self.metaGL.graph.skeleton.center)
+        self.camera.standoff = self.metaGL.graph.skeleton.radius*2
+        self.camera.resolveAngularPosition()
+
+    
 
     def __init__(self, parent=None):
         super(GLWidget, self).__init__(parent)
@@ -54,27 +110,38 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.timer = QtCore.QTimer()
         self.timer.setSingleShot(False)
         self.timer.timeout.connect(self.timeOut)
-        self.timer.start(1000)
+        self.timer.start(10)
         
-        self.hasModelGL = False
-        self.modelGL = None
-        self.metaThread = None
-        
+
+        self.metaGL = MetaGraphGL(self)
+        self.metaGL.connectionOptions.sigConnectionAccepted.connect(self.acceptConnection)
+        self.metaGL.breakOptions.sigBreakAccepted.connect(self.acceptBreak)
+        self.metaGL.splitOptions.sigSplitAccepted.connect(self.acceptSplit)
+        self.metaGL.centerChanged.connect(self.viewCenterChanged)
+        #self.metaThread = MetaGraphThread()
+        #self.metaGL.connectionOptions.sigConnectionAccepted.connect(self.metaThread.acceptConnection)
+        #self.metaGL.breakOptions.sigBreakAccepted.connect(self.metaThread.acceptBreak)
+        #self.metaGL.splitOptions.sigSplitAccepted.connect(self.metaThread.acceptSplit)
+        #self.metaThread.sigUpdateMetaGraph.connect(self.metaGL.updateGraphSlot)
+        #self.metaThread.start()
+
+
+
         self.modes = {-1 : 'NoMode', 0 : 'Connection Mode', 1 : 'Separation Mode', 2 : 'Spltting Mode'}
         
         self.currentMode = -1
     
-    @QtCore.pyqtSlot()
+    @pyqtSlot()
     def timeOut(self):
         if self.isWDown:
-            self.camera.goForward(0.15 * 5)
+            self.camera.goForward(self.speed)
         elif self.isSDown:
-            self.camera.goForward(-0.15 * 5)
+            self.camera.goForward(-self.speed)
             
         if self.isADown:
-            self.camera.goRight(-0.15 * 5)
+            self.camera.goRight(-self.speed)
         elif self.isDDown:
-            self.camera.goRight(0.15 * 5)
+            self.camera.goRight(self.speed)
         
         if self.isQDown:
             self.camera.roll(-0.01 * 5)
@@ -83,15 +150,17 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.update()
         
         
-    @QtCore.pyqtSlot()
+    @pyqtSlot()
     def updateCurrentGL(self, modelGL : object):
-        print('updating current gl')
         self.modelGL = modelGL
         self.hasModelGL = True
 
     def setupInteraction(self):
         self.isMouseLeftDown = False
         self.isMouseRightDown = False
+        self.isMouseMiddleDown = False
+        self.zoom = 1.0
+        self.zoomDegrees = 0.0
         self.lastMouseX = 0.0
         self.lastMouseY = 0.0
         
@@ -101,6 +170,9 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.isDDown = False
         self.isQDown = False
         self.isEDown = False
+
+        self.baseSpeed = 0.15 * 5
+        self.speed = self.baseSpeed
         
         self.installEventFilter(self)
         self.setFocusPolicy(Qt.StrongFocus)
@@ -110,12 +182,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         initialPosition = v3(0, 0, 40)
         
         self.camera.set_position(initialPosition)
-        
-        self.camera.look_at(v3())
+        self.viewCenter = v3()
+        self.camera.look_at(self.viewCenter)
         self.camera.set_near(1.0)
         self.camera.set_far(1000.0)
-        fov = (60.0 / 180.0) * np.pi
-        self.camera.set_fov(fov)
+        self.baseFov = (60.0 / 180.0) * np.pi
+        self.camera.set_fov(self.baseFov)
         w = float(self.width())
         h = float(self.height())
         self.camera.set_aspect(w/h)
@@ -123,28 +195,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         
         self.imageCenterX = w / 2.0
         self.imageCenterY = h / 2.0
-        
-        
-        if isinstance(p[0][0], float):
-            print('isfloat')
-        else:
-            print('not a float')
-        print('[')
-        for i in range(0, 3):
-            s = str(p[i][0])
-            s =  s + ' ' + str(p[i][1]) + ' ' + str(p[i][2]) + ' ' + str(p[i][3])
-            print(s)
-        print(']')
-            
-    def setMetaThread(self, metaThread : MetaGraphThread):
-        self.metaThread = metaThread
-        self.metaThread.currentGL.connect(self.updateCurrentGL)
-        
-        
-#    def addMetaGraph(self, graph : MetaGraph):
-#        self.skelModel.setMetaGraph(graph)
-#        self.camera.set_position(self.skelModel.skeletonViewBasePoint)
-#        self.camera.look_at(self.skelModel.skeletonCenter)
         
     def __del__(self):
         self.makeCurrent()
@@ -155,9 +205,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.normalizeAngle(angle)
         oAngle = angle * 2*np.pi / 5760.0
         pitch = self.camera.get_world_pitch()
-        print('pitch and angle')
-        print(str(pitch))
-        print(str(oAngle))
         angleDif = oAngle - pitch
         self.camera.pitch(angleDif)
         if angle != self.xRot:
@@ -169,12 +216,8 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.normalizeAngle(angle)
         oAngle = angle * 2*np.pi / 5760.0
         yaw = self.camera.get_world_yaw()
-        print('yaw and angle')
-        print(str(yaw))
-        print(str(oAngle))
         angleDif = oAngle - yaw
         self.camera.yaw(angleDif)
-        print(str(self.camera.get_world_yaw()))
         if angle != self.yRot:
             self.yRot = angle
             self.yRotationChanged.emit(angle)
@@ -184,9 +227,6 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.normalizeAngle(angle)
         oAngle = angle * 2*np.pi / 5760.0
         roll = self.camera.get_world_roll()
-        print('roll and angle')
-        print(str(roll))
-        print(str(oAngle))
         angleDif = oAngle - roll
         self.camera.roll(angleDif)
         if angle != self.zRot:
@@ -204,11 +244,12 @@ class GLWidget(QtOpenGL.QGLWidget):
         reflectance1 = (0.8, 0.1, 0.0, 0.7)
         reflectance2 = (0.0, 0.8, 0.2, 1.0)
         reflectance3 = (0.2, 0.2, 1.0, 1.0)
-
-#        glLightfv(GL_LIGHT0, GL_POSITION, lightPos)
+        
+        #glLightfv(GL_LIGHT0, GL_POSITION, lightPos)
 #        glLightfv(GL_LIGHT1, GL_POSITION, lightPos)
 #        glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight)
-        glEnable(GL_LIGHTING)
+        #glEnable(GL_LIGHTING)
+        glDisable(GL_LIGHTING)
         glEnable(GL_LIGHT0)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_BLEND)
@@ -220,57 +261,100 @@ class GLWidget(QtOpenGL.QGLWidget):
         self.rad = 10
         rad = self.rad
 
+        self.rotX = 0.0
+        self.rotY = 0.0
+
         glEnable(GL_NORMALIZE)
-        glClearColor(0.0, 0.0, 0.0, 1.0)
+        glClearColor(1.0, 1.0, 1.0, 1.0)
         
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         gluPerspective(self.camera.get_fov_deg(), self.camera.get_aspect(), self.camera.get_near(), self.camera.get_far())
         glMatrixMode(GL_MODELVIEW)
+        self.issuesGL = IssuesGL()
+        self.sphere = VBOSphere()
+        
+        random.seed(0)
+        self.randvals = []
+        for row in range(0, 201):
+            self.randvals.append([])
+            for col in range(0, 201):
+                self.randvals[row].append(random.uniform(0.25, 1.0))
 
-#        glPushMatrix()
-#        glLoadMatrixf(self.camera.get_model_matrix())
-#        p = m44()
-#        glGetFloatv(GL_MODELVIEW_MATRIX, p)
-#        print('model matrix?')
-#        print('[')
-#        for i in range(0, 3):
-#            s = str(p[i][0])
-#            s =  s + ' ' + str(p[i][1]) + ' ' + str(p[i][2]) + ' ' + str(p[i][3])
-#            print(s)
-#        print(']')
-#        gluLookAt(0.0, 0.0, self.rad*2, self.cx, self.cy, self.cz, 0.0, 1.0, 0.0)
-#        glPopMatrix()
 
     def paintGL(self):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        
+
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
         gluPerspective(self.camera.get_fov_deg(), self.camera.get_aspect(), self.camera.get_near(), self.camera.get_far())
         
+
         glMatrixMode(GL_MODELVIEW)
         glPushMatrix()
         glLoadIdentity()
         
-        pos = self.camera.get_position()
-        at = self.camera.get_world_forward()
-        lpos = pos + at
-        up = self.camera.get_world_up()
         
+        
+        self.camera.look_at(self.camera.viewCenter)
+        lpos = self.camera.viewCenter
+        up = self.camera.get_world_up()
+
+        pos = self.camera.get_position()
+        lightpos = (pos[0], pos[1], pos[2], 1.0)
+        color = (1.0, 0.0, 1.0, 1.0)
+
+        ldir = lpos - pos
+
+        
+        
+        
+
         gluLookAt(pos[0], pos[1], pos[2], lpos[0], lpos[1], lpos[2], up[0], up[1], up[2])
         
-        if self.hasModelGL:
-            self.drawGear(self.modelGL, 0, 0, 0, 0)
-              
+        glEnable(GL_LIGHTING)
+        glEnable(GL_LIGHT0)
+        glLightfv(GL_LIGHT0, GL_POSITION, lightpos)
+        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, ldir)
+        ldir /= np.linalg.norm(ldir)
+
+        #self.metaGL.display(self.zoom)
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color)
+        #self.issuesGL.issuegl()
+        x = -100.0
+        y = -100.0
+        z = 0.0
+        row = 0
+        while x <= 100:
+            y = -10.0
+            col = 0
+            while y <= 10:
+                self.sphere.fancyDraw(1.0, 0.5, 1.0, x, y, z, self.randvals[row][col])
+                y = y + 1.0
+                col = col  + 1
+            x = x + 1.0
+            row = row + 1
+
+        #glTranslated(-100.0, 0.0, 0.0)
+        #for x in range(, 200):
+        #    glTranslated(0.0, -100.0, 0.0)
+        #    for y in range(0, 100):
+        #        #glScalef(2.0, 2.0, 2.0)
+        #        self.sphere.draw()
+        #        #glScalef(0.5, 0.5, 0.5)
+        #        glTranslated(0.0, 1.0, 0.0)
+        #    glTranslated(1.0, 0.0, 0.0)
+
+        
+        glDisable(GL_LIGHTING)
         glPopMatrix()
  
         
     def resizeGL(self, width : int, height : int):
         side = min(width, height)
         
-        fov = (60.0 / 180.0) * np.pi
-        self.camera.set_fov(fov)
+        #fov = (60.0 / 180.0) * np.pi
+        #self.camera.set_fov(fov)
         w = float(self.width())
         h = float(self.height())
         self.camera.set_aspect(w/h)
@@ -278,16 +362,14 @@ class GLWidget(QtOpenGL.QGLWidget):
         
         glViewport(0, 0, width, height)
 
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-        glFrustum(-1.0, +1.0, -1.0, 1.0, 5.0, 60.0)
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
-        glTranslated(0.0, 0.0, -40.0)
+        #glMatrixMode(GL_PROJECTION)
+        #glLoadIdentity()
+        #glFrustum(-1.0, +1.0, -1.0, 1.0, 5.0, 60.0)
+        #glMatrixMode(GL_MODELVIEW)
+        #glLoadIdentity()
+        #glTranslated(0.0, 0.0, -40.0)
         self.imageCenterX = float(width) / 2.0
         self.imageCenterY = float(height) / 2.0
-        self.pitchPerY = self.camera.get_fov() / h
-        self.yawPerX = self.pitchPerY
 
 
 
@@ -300,12 +382,12 @@ class GLWidget(QtOpenGL.QGLWidget):
     def zRotation(self):
         return self.zRot 
 
-    def drawGear(self, gear, dx : float, dy : float, dz : float, angle : float):
-        glPushMatrix()
-        glTranslated(dx, dy, dz)
-        glRotated(angle, 0.0, 0.0, 1.0)
-        glCallList(gear)
-        glPopMatrix()
+    #def drawCallList(self, gear, dx : float = 0, dy : float = 0, dz : float = 0, angle : float = 0):
+    #    glPushMatrix()
+    #    glTranslated(dx, dy, dz)
+    #    glRotated(angle, 0.0, 0.0, 1.0)
+    #    glCallList(gear)
+    #    glPopMatrix()
 
     def normalizeAngle(self, angle : float):
         while (angle < 0):
@@ -318,31 +400,26 @@ class GLWidget(QtOpenGL.QGLWidget):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         key = event.key()
         modifiers = event.modifiers()
-        if self.underMouse():
+
+        if self.underMouse() and modifiers == Qt.NoModifier:
             if key == Qt.Key_W:
-#                print('w pressed')
                 self.isWDown = True
 #                self.camera.goUp(0.1)
             elif key == Qt.Key_S:
-#                print('s pressed'
                 self.isSDown = True
 #                self.camera.goUp(-0.1)
                 
             elif key == Qt.Key_A:
-#                print('a pressed')
                 self.isADown = True
 #                self.camera.goRight(-0.1)
             elif key == Qt.Key_D:
                 self.isDDown = True
-#                print('d pressed')
 #                self.camera.goRight(0.1)
                 
             elif key == Qt.Key_Q:
-#                print('q pressed')
                 self.isQDown = True
 #                self.camera.roll(0.05)
             elif key == Qt.Key_E:
-#                print('e pressed')
                 self.isEDown = True
 #                self.camera.roll(-0.05)
         
@@ -353,33 +430,46 @@ class GLWidget(QtOpenGL.QGLWidget):
     def keyReleaseEvent(self, event: QtGui.QKeyEvent):
         key = event.key()
         modifiers = event.modifiers()
-        if self.underMouse():
-            if key == Qt.Key_W:
-                self.isWDown = False
-            elif key == Qt.Key_S:
-                self.isSDown = False
+        if key == Qt.Key_W:
+            self.isWDown = False
+        elif key == Qt.Key_S:
+            self.isSDown = False
                 
-            elif key == Qt.Key_A:
-                self.isADown = False
-            elif key == Qt.Key_D:
-                self.isDDown = False
+        elif key == Qt.Key_A:
+            self.isADown = False
+        elif key == Qt.Key_D:
+            self.isDDown = False
                 
-            elif key == Qt.Key_Q:
-                self.isQDown = False
-            elif key == Qt.Key_E:
-                self.isEDown = False
+        elif key == Qt.Key_Q:
+            self.isQDown = False
+        elif key == Qt.Key_E:
+            self.isEDown = False
                 
-            elif key == Qt.Key_Return:
-                if self.currentMode == 0:
-                    t = 1
+        elif key == Qt.Key_Return:
+            if self.currentMode == 0:
+                t = 1
 #                    self.skelModel.AcceptConnection()
-                elif self.currentMode == 1:
-                    g = 3
+            elif self.currentMode == 1:
+                g = 3
 #                    self.skelModel.AcceptBreak()
                 
         QtOpenGL.QGLWidget.keyReleaseEvent(self, event)
 
+    def wheelEvent(self, QWheelEvent : QtGui.QWheelEvent):
+        numDegrees = (QWheelEvent.angleDelta() / 8.0).y()
 
+
+        self.zoomDegrees += numDegrees
+
+        halfRotations = self.zoomDegrees / 180
+
+        self.zoom = pow(2.0, halfRotations)
+
+        self.camera.set_fov(self.baseFov / self.zoom)
+
+        self.speed = self.baseSpeed / self.zoom
+
+        return super().wheelEvent(QWheelEvent)
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         
@@ -389,7 +479,8 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.lastMouseY = event.y()
             ray = self.getRay(event.x(), event.y())
             origin = self.camera.getNpPosition()
-            self.metaThread.RayPickedEvent(origin, ray)
+            self.metaGL.doPicking(origin, ray)
+            #self.metaThread.RayPickedEvent(origin, ray)
             '''
             if self.currentMode == 0:
                 (hitFound, nodeHit, nodeHitId) = self.skelModel.getFirstNodeHit(origin, ray)
@@ -400,13 +491,13 @@ class GLWidget(QtOpenGL.QGLWidget):
                 if hitFound:
                     self.skelModel.PickBreakEdge(edgeHit)
             '''
-#            print('mouse right pressed')
         elif event.button() == Qt.LeftButton and not self.isMouseRightDown:
             self.isMouseLeftDown = True
             self.lastMouseX = event.x()
             self.lastMouseY = event.y()
             ray = self.getRay(event.x(), event.y())
             origin = self.camera.getNpPosition()
+            self.metaGL.doPicking(origin, ray)
 #            (hitFound, edgeHit, edgeHitId) = self.skelModel.getFirstEdgeHit(origin, ray)
 #            self.skelModel.highlightEdge(edgeHitId)
             '''
@@ -414,24 +505,51 @@ class GLWidget(QtOpenGL.QGLWidget):
                 (hitFound, nodeHit, nodeHitId) = self.skelModel.getFirstNodeHit(origin, ray)
                 self.skelModel.highlightNode(nodeHitId)
             '''
-#            print('mouse left pressed')
+
+        elif event.button() == Qt.MiddleButton:
+            self.isMouseMiddleDown = True
+            self.lastMouseX = event.x()
+            self.lastMouseY = event.y()
         
         
     def mouseMoveEvent(self, event: QtGui.QMouseEvent):
-        if self.isMouseLeftDown:
-#            print('mouse left dragged')
+
+        if self.isMouseMiddleDown:
             difX = event.x() - self.lastMouseX
             difY = event.y() - self.lastMouseY
+
+            self.camera.goUp(self.speed * difY * 0.3)
+            self.camera.goRight(-self.speed * difX * 0.3)
+
+            self.lastMouseX = event.x()
+            self.lastMouseY = event.y()
+
+        if self.isMouseLeftDown:
+            difX = event.x() - self.lastMouseX
+            difY = event.y() - self.lastMouseY
+
             
-            self.camera.pitch(self.pitchPerY * difY)
-            self.camera.yaw(self.yawPerX * difX)
+            self.camera.increment_phi(0.01*difX)
+            self.camera.increment_theta(0.01*difY)
+            self.camera.resolveAngularPosition()
+
+            
             self.lastMouseX = event.x()
             self.lastMouseY = event.y()
             
         elif self.isMouseRightDown:
-            print('mouse right dragged')
+            difX = event.x() - self.lastMouseX
+            difY = event.y() - self.lastMouseY
+
+            self.camera.yaw(0.01 * difX)
+            self.camera.pitch(0.01*difY)
+            self.camera.resolveAngularPosition()
+
             
-        if self.isMouseLeftDown or self.isMouseRightDown:
+            self.lastMouseX = event.x()
+            self.lastMouseY = event.y()
+            
+        if self.isMouseLeftDown or self.isMouseRightDown or self.isMouseMiddleDown:
             if event.x() > self.width():
                 self.lastMouseX = 0
                 newPoint = self.mapToGlobal(QtCore.QPoint(0, event.y()))
@@ -455,6 +573,8 @@ class GLWidget(QtOpenGL.QGLWidget):
             self.isMouseRightDown = False
         elif event.button() == Qt.LeftButton:
             self.isMouseLeftDown = False
+        elif event.button() == Qt.MiddleButton:
+            self.isMouseMiddleDown = False
             
             
     def getRay(self, windowX : float, windowY : float):
@@ -483,55 +603,45 @@ class GLWidget(QtOpenGL.QGLWidget):
         dirVec = dirVec/ np.linalg.norm(dirVec)
         
         return dirVec
-    
-#    def setMetaGraph(self, graph : MetaGraph):
-#        self.skelModel.setMetaGraph(graph)
-#        print(self.skelModel.skeletonViewBasePoint)
-#        print(self.skelModel.skeletonCenter)
-#        self.camera.set_position(self.skelModel.skeletonViewBasePoint)
-#        self.camera.look_at(self.skelModel.skeletonCenter)
-#        
-#        if self.currentMode == 0:
-#            self.UpdateConnectionWidget()
             
     
     def enterConnectionMode(self, ConnectionWidget : Ui_ConnectionTabWidget):
         self.currentMode = 0
-        self.connectionWidget = ConnectionWidget        
-#        self.skelModel.enterConnectionMode(ConnectionWidget)
-        self.connectionWidget.ComponentOne.currentIndexChanged.connect(self.ComponentOneChangeSlot)
-        self.connectionWidget.ComponentTwo.currentIndexChanged.connect(self.ComponentTwoChangeSlot)
+        self.connectionWidget = ConnectionWidget
+        self.metaGL.enterConnectionMode(ConnectionWidget)
+
         
-    def UpdateConnectionWidget(self):
-        self.connectionWidget.ComponentOne.currentIndexChanged.disconnect(self.ComponentOneChangeSlot)
-        self.connectionWidget.ComponentTwo.currentIndexChanged.disconnect(self.ComponentTwoChangeSlot)
+
+    def enterBreakMode(self, BreakWidget : Ui_BreakTabWidget):
+        self.currentMode = 1
+        self.metaGL.enterBreakMode(BreakWidget)
+        
+        
+    def enterSplitMode(self, SplitWidget : Ui_SplitTabWidget):
+        self.currentMode = 2
+        self.metaGL.enterSplitMode(SplitWidget)
+
+        
+#    def UpdateConnectionWidget(self):
+#        self.connectionWidget.ComponentOne.currentIndexChanged.disconnect(self.ComponentOneChangeSlot)
+#        self.connectionWidget.ComponentTwo.currentIndexChanged.disconnect(self.ComponentTwoChangeSlot)
 #        self.skelModel.updateConnectionWidget(self.connectionWidget)
 #        self.connectionWidget.ComponentOne.currentIndexChanged.connect(self.ComponentOneChangeSlot)
 #        self.connectionWidget.ComponentTwo.currentIndexChanged.connect(self.ComponentTwoChangeSlot)
         
-    @QtCore.pyqtSlot(int)
-    def ComponentOneChangeSlot(self, val):
-        p = 2
-#        self.skelModel.ChangeComponentOne(int(val))
+#    @QtCore.pyqtSlot(int)
+#    def ComponentOneChangeSlot(self, val):
+#        p = 2
+#        #self.skelModel.ChangeComponentOne(int(val))
         
-    @QtCore.pyqtSlot(int)
-    def ComponentTwoChangeSlot(self, val):
-        g = 3
-#        self.skelModel.ChangeComponentTwo(int(val))
-        
-        
-    def enterBreakMode(self):
-        self.currentMode = 1
-#        self.skelModel.enterBreakMode()
+#    @QtCore.pyqtSlot(int)
+#    def ComponentTwoChangeSlot(self, val):
+#        g = 3
+##        self.skelModel.ChangeComponentTwo(int(val))
         
         
-    def enterSplitMode(self):
-        p = 3
         
 #        projectedZ = -1.0
-#        print('projected x', projectedX)
-#        print('projected y', projectedY)
-#        print('projected z', projectedZ)
 #        
 #        self.camera.computeProjection()
 #        
@@ -544,7 +654,6 @@ class GLWidget(QtOpenGL.QGLWidget):
 #        
 #        unprojectedPoint = inverseProjection @ projectedPoint
 #        
-#        print('unprojected point', unprojectedPoint)
 #        
 #        dirVec = m41(unprojectedPoint[0][0],
 #                     unprojectedPoint[1][0],
@@ -553,13 +662,10 @@ class GLWidget(QtOpenGL.QGLWidget):
 #        dirVec = dirVec / np.linalg.norm(dirVec)
 #        dirVec[3][0] = 1
 #        
-#        print('camera space vector',  dirVec)
 #        camMat = self.camera.get_camera_matrix()
-#        print('cam mat', camMat)
 #        
 #        p = camMat @ dirVec
 #        
-#        print('p', p)
 #        
 #        dirVec = v3(p[0][0],
 #                     p[1][0],
@@ -569,7 +675,6 @@ class GLWidget(QtOpenGL.QGLWidget):
 #        
 #        dirVec = dirVec / np.linalg.norm(dirVec)
 #        
-#        print('dirvec', dirVec)
 #        
 #        return dirVec
     

@@ -107,7 +107,6 @@ class Camera(Spatial):
 
     def get_camera_matrix(self):
         v = self.get_position()
-        print('position', v)
         q = self.get_orientation()
         qi = q_inv(q)
         vn = q_mul_v(qi,v)
